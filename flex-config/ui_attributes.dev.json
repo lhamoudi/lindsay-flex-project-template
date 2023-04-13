@@ -6,6 +6,7 @@
         "rules": {}
       },
       "schedule_manager": {
+        "enabled": true,
         "serverless_domain": "<PLACEHOLDER_SCHEDULE_MANAGER_DOMAIN>"
       },
       "enhanced_crm_container": {
