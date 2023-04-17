@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import * as Flex from '@twilio/flex-ui';
 
 import { wrapperStyle, frameStyle, IFrameRefreshButtonStyledDiv } from './IFrameWrapperStyles';
+import { TaskHelper } from '@twilio/flex-ui';
 
 export interface Props {
   thisTask: Flex.ITask; // task assigned to iframe
@@ -23,9 +24,12 @@ export const IFrameWrapper = ({ thisTask, task, baseUrl }: Props) => {
   const visibility =
     task?.taskSid === thisTask.taskSid || task?.attributes?.parentTask === thisTask.sid ? 'visible' : ('hidden' as any);
 
-  const url = thisTask?.attributes?.case_id
-    ? `${baseUrl}?ticket_id=${thisTask.attributes.case_id}&iframe=true`
-    : `${baseUrl}?iframe=true`;
+  let url = `${baseUrl}?iframe=true`;
+  if (thisTask?.attributes?.case_id) {
+    url = `${baseUrl}?ticket_id=${thisTask.attributes.case_id}`;
+  } else if (TaskHelper.isCallTask(task)) {
+    url = `${baseUrl}&q=${task.attributes.name}`;
+  }
 
   return (
     <div style={{ ...wrapperStyle, visibility }}>
