@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export && npm run transfer-assets",
-    "transfer-assets": "rm -rfv ../../serverless-functions/src/assets/features/chat-to-video/ && mkdir ../../serverless-functions/src/assets/features/chat-to-video/ && cp -R ./out/* ../../serverless-functions/src/assets/features/chat-to-video/",
+    "transfer-assets": "rm -rfv ../../serverless-functions/src/assets/features/chat-to-video-escalation/ && mkdir ../../serverless-functions/src/assets/features/chat-to-video-escalation/ && cp -R ./out/* ../../serverless-functions/src/assets/features/chat-to-video-escalation/",
     "start": "next start",
     "lint": "next lint",
     "tsc": "tsc --noEmit"
