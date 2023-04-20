@@ -54,7 +54,7 @@ exports.handler = prepareFlexFunction(requiredParameters, async (context, event,
     response.setBody({
       unique_code,
       valid_until: document.dateExpires,
-      full_url: `https://${context.DOMAIN_NAME}/features/chat-to-video/index.html?code=${unique_code}`,
+      full_url: `https://${context.DOMAIN_NAME}/features/chat-to-video-escalation/index.html?code=${unique_code}`,
     });
 
     return callback(null, response);

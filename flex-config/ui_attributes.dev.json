@@ -38,6 +38,27 @@
           }
         ]
       },
+      "teams_view_filters": {
+        "enabled": true,
+        "logFilters": true,
+        "applied_filters": {
+          "email": true,
+          "department": true,
+          "queue_no_worker_data": true,
+          "queue_worker_data": false,
+          "team": true,
+          "agent_skills": true
+        },
+        "department_options": ["Cars", "Planes", "Other"],
+        "team_options": [
+          "Cozy Cone Hotel",
+          "Hostile Takeover Bank Racing Team",
+          "Rust-eze Racing Team",
+          "Tow-Mater's Towing Service",
+          "Team Lindsay",
+          "Other"
+        ]
+      },
       "lindsay_set_insights_attributes": {
         "enabled": true
       }
