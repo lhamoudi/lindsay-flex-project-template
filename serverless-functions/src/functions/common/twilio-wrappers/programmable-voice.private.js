@@ -175,3 +175,28 @@ exports.updateCall = async (parameters) => {
     return retryHandler(error, parameters, exports.updateCall);
   }
 };
+
+/**
+ * @param {object} parameters the parameters for the function
+ * @param {number} parameters.attempts the number of retry attempts performed
+ * @param {object} parameters.context the context from calling lambda function
+ * @param {string} parameters.queueSid the unique queue SID to fetch
+ * @returns {Map} The given queue's properties
+ * @description fetches the given queue SID's properties
+ */
+exports.fetchVoiceQueue = async (parameters) => {
+  const { context, queueSid } = parameters;
+
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
+  if (!isString(queueSid)) throw new Error('Invalid parameters object passed. Parameters must contain queueSid string');
+
+  try {
+    const client = context.getTwilioClient();
+
+    const queueProperties = await client.queues(queueSid).fetch();
+
+    return { success: true, queueProperties, status: 200 };
+  } catch (error) {
+    return retryHandler(error, parameters, exports.fetchVoiceQueue);
+  }
+};
