@@ -157,6 +157,12 @@
       "custom_hold_music": {
         "enabled": false,
         "url": ""
+      },
+      "lindsay_set_insights_attributes": {
+        "enabled": false
+      },
+      "lindsay_custom": {
+        "enabled": false
       }
     }
   }

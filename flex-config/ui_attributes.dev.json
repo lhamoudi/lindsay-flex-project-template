@@ -24,6 +24,22 @@
           "wrapup": "Wrap Up",
           "wrapupNoAcd": "Wrap Up, No ACD"
         }
+      },
+      "agent_automation": {
+        "enabled": true,
+        "configuration": [
+          {
+            "channel": "voice",
+            "auto_accept": false,
+            "auto_select": false,
+            "auto_wrapup": true,
+            "required_attributes": [],
+            "wrapup_time": 8000
+          }
+        ]
+      },
+      "lindsay_set_insights_attributes": {
+        "enabled": true
       }
     }
   }

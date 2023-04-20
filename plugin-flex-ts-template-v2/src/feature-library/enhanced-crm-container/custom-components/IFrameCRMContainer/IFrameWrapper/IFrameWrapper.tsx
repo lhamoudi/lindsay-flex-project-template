@@ -29,7 +29,7 @@ export const IFrameWrapper = ({ thisTask, task, baseUrl }: Props) => {
     url = `${baseUrl}?ticket_id=${thisTask.attributes.case_id}`;
   } else if (TaskHelper.isCallTask(task)) {
     url = `${baseUrl}&q=${task.attributes.caller}`;
-              
+  }
 
   return (
     <div style={{ ...wrapperStyle, visibility }}>
