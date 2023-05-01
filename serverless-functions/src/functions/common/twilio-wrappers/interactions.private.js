@@ -1,6 +1,6 @@
 const { isString, isObject, isNumber } = require('lodash');
 
-const retryHandler = require(Runtime.getFunctions()['common/twilio-wrappers/retry-handler'].path).retryHandler;
+const retryHandler = require(Runtime.getFunctions()['common/helpers/retry-handler'].path).retryHandler;
 
 /**
  * @param {object} parameters the parameters for the function
@@ -12,11 +12,9 @@ const retryHandler = require(Runtime.getFunctions()['common/twilio-wrappers/retr
  * @returns {object} An object containing details about the interaction channel invite
  * @description the following method is used to create an Interaction Channel Invite
  */
-exports.participantCreateInvite = async (parameters) => {
-  const { attempts, context, interactionSid, channelSid, routing } = parameters;
+exports.participantCreateInvite = async function participantCreateInvite(parameters) {
+  const { context, interactionSid, channelSid, routing } = parameters;
 
-  if (!isNumber(attempts))
-    throw new Error('Invalid parameters object passed. Parameters must contain the number of attempts');
   if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (!isString(interactionSid))
     throw new Error('Invalid parameters object passed. Parameters must contain interactionSid string value');
@@ -48,11 +46,9 @@ exports.participantCreateInvite = async (parameters) => {
  * @returns {object} An object containing an array of queues for the account
  * @description the following method is used to update/modify a channel participant
  */
-exports.participantUpdate = async (parameters) => {
-  const { attempts, context, interactionSid, channelSid, participantSid, status } = parameters;
+exports.participantUpdate = async function participantUpdate(parameters) {
+  const { context, interactionSid, channelSid, participantSid, status } = parameters;
 
-  if (!isNumber(attempts))
-    throw new Error('Invalid parameters object passed. Parameters must contain the number of attempts');
   if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (!isString(interactionSid))
     throw new Error('Invalid parameters object passed. Parameters must contain interactionSid string value');

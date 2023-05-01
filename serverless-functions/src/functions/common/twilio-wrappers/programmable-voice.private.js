@@ -1,6 +1,6 @@
 const { isString, isObject } = require('lodash');
 
-const retryHandler = require(Runtime.getFunctions()['common/twilio-wrappers/retry-handler'].path).retryHandler;
+const retryHandler = require(Runtime.getFunctions()['common/helpers/retry-handler'].path).retryHandler;
 
 /**
  * @param {object} parameters the parameters for the function
@@ -10,11 +10,10 @@ const retryHandler = require(Runtime.getFunctions()['common/twilio-wrappers/retr
  * @returns {Map} The given call's properties
  * @description fetches the given call SID's properties
  */
-exports.fetchProperties = async (parameters) => {
+exports.fetchProperties = async function fetchProperties(parameters) {
   const { context, callSid } = parameters;
 
-  if (!isObject(context))
-    throw new Error('Invalid parameters object passed. Parameters must contain reason context object');
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (!isString(callSid)) throw new Error('Invalid parameters object passed. Parameters must contain callSid string');
 
   try {
@@ -37,11 +36,10 @@ exports.fetchProperties = async (parameters) => {
  * @returns {object} generic response object
  * @description cold transfers the given call SID to the given phone number
  */
-exports.coldTransfer = async (parameters) => {
+exports.coldTransfer = async function coldTransfer(parameters) {
   const { context, callSid, to } = parameters;
 
-  if (!isObject(context))
-    throw new Error('Invalid parameters object passed. Parameters must contain reason context object');
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (!isString(callSid)) throw new Error('Invalid parameters object passed. Parameters must contain callSid string');
   if (!isString(to)) throw new Error('Invalid parameters object passed. Parameters must contain to string');
 
@@ -67,11 +65,10 @@ exports.coldTransfer = async (parameters) => {
  * @returns {Map} The new recording's properties
  * @description creates recording for the given call SID
  */
-exports.createRecording = async (parameters) => {
+exports.createRecording = async function createRecording(parameters) {
   const { context, callSid, params } = parameters;
 
-  if (!isObject(context))
-    throw new Error('Invalid parameters object passed. Parameters must contain reason context object');
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (!isString(callSid)) throw new Error('Invalid parameters object passed. Parameters must contain callSid string');
 
   try {
@@ -95,11 +92,10 @@ exports.createRecording = async (parameters) => {
  * @returns {Map} The recording's properties
  * @description updates the given recording for the given call
  */
-exports.updateCallRecording = async (parameters) => {
+exports.updateCallRecording = async function updateCallRecording(parameters) {
   const { context, callSid, recordingSid, params } = parameters;
 
-  if (!isObject(context))
-    throw new Error('Invalid parameters object passed. Parameters must contain reason context object');
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (!isString(callSid)) throw new Error('Invalid parameters object passed. Parameters must contain callSid string');
   if (!isString(recordingSid))
     throw new Error('Invalid parameters object passed. Parameters must contain recordingSid string');
@@ -126,11 +122,10 @@ exports.updateCallRecording = async (parameters) => {
  * @returns {Map} The recording's properties
  * @description updates the given recording for the given call
  */
-exports.updateConferenceRecording = async (parameters) => {
+exports.updateConferenceRecording = async function updateConferenceRecording(parameters) {
   const { context, conferenceSid, recordingSid, params } = parameters;
 
-  if (!isObject(context))
-    throw new Error('Invalid parameters object passed. Parameters must contain reason context object');
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (!isString(conferenceSid))
     throw new Error('Invalid parameters object passed. Parameters must contain conferenceSid string');
   if (!isString(recordingSid))
@@ -157,11 +152,10 @@ exports.updateConferenceRecording = async (parameters) => {
  * @returns {Map} The call's properties
  * @description updates the given call
  */
-exports.updateCall = async (parameters) => {
+exports.updateCall = async function updateCall(parameters) {
   const { context, callSid, params } = parameters;
 
-  if (!isObject(context))
-    throw new Error('Invalid parameters object passed. Parameters must contain reason context object');
+  if (!isObject(context)) throw new Error('Invalid parameters object passed. Parameters must contain context object');
   if (!isString(callSid)) throw new Error('Invalid parameters object passed. Parameters must contain callSid string');
   if (!isObject(params)) throw new Error('Invalid parameters object passed. Parameters must contain params object');
 
