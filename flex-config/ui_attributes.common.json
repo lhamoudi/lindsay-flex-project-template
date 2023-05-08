@@ -35,6 +35,13 @@
       "enhanced_crm_container": {
         "enabled": false
       },
+      "enhanced_crm_container_with_video": {
+        "enabled": false,
+        "pop_out_button": true,
+        "refresh_button": true,
+        "video_app_url": "<PLACEHOLDER_VIDEO_APP_URL>",
+        "crm_app_url": "http://www.bing.com"
+      },
       "internal_call": {
         "enabled": false
       },
@@ -163,9 +170,6 @@
       "lindsay_set_insights_attributes": {
         "enabled": false
       },
-      "lindsay_custom": {
-        "enabled": false
-      },
       "dispositions": {
         "enabled": false,
         "enable_notes": true,
@@ -180,10 +184,7 @@
         "per_queue": {
           "exampleQueueSid": {
             "require_disposition": true,
-            "dispositions": [
-              "Promotional Sale",
-              "Renewal"
-            ]
+            "dispositions": ["Promotional Sale", "Renewal"]
           }
         }
       }

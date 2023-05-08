@@ -9,11 +9,15 @@
         "enabled": true,
         "serverless_domain": "<PLACEHOLDER_SCHEDULE_MANAGER_DOMAIN>"
       },
-      "enhanced_crm_container": {
-        "enabled": true
+      "enhanced_crm_container_with_video": {
+        "enabled": true,
+        "pop_out_button": true,
+        "refresh_button": true,
+        "video_app_url": "<PLACEHOLDER_VIDEO_APP_URL>",
+        "crm_app_url": "https://www.bing.com"
       },
       "chat_to_video_escalation": {
-        "enabled": true
+        "enabled": false
       },
       "activity_reservation_handler": {
         "enabled": true,
