@@ -9,6 +9,9 @@
         "enabled": true,
         "serverless_domain": "<PLACEHOLDER_SCHEDULE_MANAGER_DOMAIN>"
       },
+      "enhanced_crm_container": {
+        "enabled": false
+      },
       "enhanced_crm_container_with_video": {
         "enabled": true,
         "pop_out_button": true,

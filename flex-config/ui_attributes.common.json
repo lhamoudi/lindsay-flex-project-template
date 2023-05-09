@@ -29,11 +29,12 @@
       },
       "conference": {
         "enabled": true,
-        "add_button": true,
         "hold_workaround": false
       },
       "enhanced_crm_container": {
-        "enabled": false
+        "enabled": false,
+        "should_display_url_when_no_tasks": false,
+        "display_url_when_no_tasks": "https://www.bing.com"
       },
       "enhanced_crm_container_with_video": {
         "enabled": false,
@@ -43,9 +44,6 @@
         "crm_app_url": "http://www.bing.com"
       },
       "internal_call": {
-        "enabled": false
-      },
-      "override_queue_transfer_directory": {
         "enabled": false
       },
       "scrollable_activities": {
@@ -157,7 +155,8 @@
         ]
       },
       "supervisor_complete_reservation": {
-        "enabled": true
+        "enabled": true,
+        "outcome": "Completed by supervisor"
       },
       "canned_responses": {
         "enabled": true,
@@ -166,6 +165,18 @@
       "custom_hold_music": {
         "enabled": false,
         "url": ""
+      },
+      "custom_transfer_directory": {
+        "enabled": true,
+        "use_paste_search_icon": false,
+        "queue": {
+          "enabled": true,
+          "show_only_queues_with_available_workers": true,
+          "show_real_time_data": true,
+          "enforce_queue_filter_from_worker_object": true,
+          "enforce_global_exclude_filter": false,
+          "global_exclude_filter": ""
+        }
       },
       "dispositions": {
         "enabled": false,
