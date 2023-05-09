@@ -167,9 +167,6 @@
         "enabled": false,
         "url": ""
       },
-      "lindsay_set_insights_attributes": {
-        "enabled": false
-      },
       "dispositions": {
         "enabled": false,
         "enable_notes": true,
@@ -187,6 +184,9 @@
             "dispositions": ["Promotional Sale", "Renewal"]
           }
         }
+      },
+      "lindsay_set_insights_attributes": {
+        "enabled": false
       }
     }
   }
