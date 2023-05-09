@@ -238,7 +238,6 @@ exports.handler = async (context, event, callback) => {
         context,
         numberToCall: event.Caller,
         numberToCallFrom: event.Called,
-        attempts: 0,
       });
 
       // End the interaction. Hangup the call.
@@ -284,7 +283,6 @@ exports.handler = async (context, event, callback) => {
         recordingUrl: event.RecordingUrl,
         transcriptSid: event.TranscriptionSid,
         transcriptText: event.TranscriptionText,
-        attempts: 0,
       });
 
       return callback(null, '');

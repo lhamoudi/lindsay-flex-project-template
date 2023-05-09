@@ -68,7 +68,7 @@ After the above requirements have been met:
 
 ## Build & Deploy Application for Twilio Asset Deployment
 
-1. Run the following command to build the application and transfer the build output to the `../../serverless-functions/src/assets/features/chat-to-video/escalation` folder:
+1. Run the following command to build the application and transfer the build output to the `../../serverless-functions/src/assets/features/chat-to-video-escalation` folder:
 
    ```bash
    npm run build
