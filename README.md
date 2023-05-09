@@ -69,7 +69,9 @@ The primary aims of this template are
 | Conversation Transfer             | _introduce conversation-based messaging transfer functionality for agents_                          | No                                                                                                | [Yes](plugin-flex-ts-template-v2/src/feature-library/conversation-transfer/README.md)            |                    |
 | Conference (external)             | _provide agents the ability to conference in external numbers_                                      | No                                                                                                | [Yes](plugin-flex-ts-template-v2/src/feature-library/conference/README.md)                       | ✅                 |
 | Custom Hold Music                 | _customize the experience when an agent places a call on hold_                                      | No                                                                                                | [Yes](plugin-flex-ts-template-v2/src/feature-library/custom-hold-music/README.md)                |                    |
+| Custom Transfer Directory                 | _customize the agent and queue transfer directories_                                      | No                                                                                                | [Yes](plugin-flex-ts-template-v2/src/feature-library/custom-transfer-directory/README.md)                | ✅         |
 | Device Manager                    | _provide agents the ability to select the audio output device_                                      | No                                                                                                | [Yes](plugin-flex-ts-template-v2/src/feature-library/device-manager/README.md)                   | ✅                 |
+| Dispositions                      | _provide agents the ability to select a disposition/wrap-up code and enter notes_                   | No                                                                                                | [Yes](plugin-flex-ts-template-v2/src/feature-library/dispositions/README.md)                   |                    |
 | Dual Channel Recording            | _automatically record both inbound and outbound calls in dual channel_                              | No                                                                                                | [Yes](plugin-flex-ts-template-v2/src/feature-library/dual-channel-recording/README.md)           |                    |
 | Enhanced CRM Container            | _optimize the CRM container experience_                                                             | [Yes](plugin-flex-ts-template-v1/src/feature-library/enhanced-crm-container/README.md)            | [Yes](plugin-flex-ts-template-v2/src/feature-library/enhanced-crm-container/README.md)           |                    |
 | Hang Up By Reporting              | _populates the Hang Up By and Destination attributes in Flex Insights_                              | No                                                                                                | [Yes](plugin-flex-ts-template-v2/src/feature-library/hang-up-by/README.md)                       |                    |
@@ -205,7 +207,7 @@ If you plan to use the schedule manager feature, deploy its serverless functions
 
 ```bash
 cd ../serverless-schedule-manager
-twilio serverless:deploy
+npm run deploy
 ```
 
 Next, populate the serverless domains deployed above into the config:
@@ -228,7 +230,7 @@ Start the plugin deployment (example is v2, substitute for v1 if you're using v1
 
 ```bash
 cd ../plugin-flex-ts-template-v2
-twilio flex:plugins:deploy --major --changelog "Initial deploy" --description "Flex project template"
+npm run deploy -- --changelog "Initial deploy" --description "Flex project template"
 ```
 
 After your deployment runs you will receive instructions for releasing your plugin from the bash prompt. You can use this or skip this step and release your plugin from the Flex plugin dashboard here https://flex.twilio.com/admin/plugins
@@ -464,6 +466,8 @@ convenience script that does the same as setup-local-environment except it won't
 
 # CHANGELOG
 
+- 1.0.5
+  - Removed plugin versioning from repo, instead relying on automatic versioning by the Flex Plugins CLI.
 - 1.0.4
   - Added `add-feature` script for creating new features
   - Modified v2 plugin to load features dynamically
