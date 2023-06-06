@@ -5,6 +5,10 @@
       "activity_skill_filter": {
         "rules": {}
       },
+      "conference": {
+        "enabled": true,
+        "hold_workaround": false
+      },
       "schedule_manager": {
         "enabled": true,
         "serverless_domain": "<PLACEHOLDER_SCHEDULE_MANAGER_DOMAIN>"

@@ -19,7 +19,7 @@ export const IFrameWrapper = ({ thisTask, task, crmAppUrl, videoAppUrl }: Props)
   const iFrameRef = useRef<HTMLIFrameElement>(null);
   const [iFrameKey, setIframeKey] = useState(0 as number);
   const wrapperDivRef = useRef<HTMLDivElement>(null);
-  const isVideoTask = thisTask?.attributes?.isVideo === 'true' && TaskHelper.isChatBasedTask(thisTask);
+  const isVideoTask = thisTask?.attributes?.taskType === 'video';
 
   const getWorkerFriendlyName = (worker: Worker) => {
     return (
@@ -55,7 +55,7 @@ export const IFrameWrapper = ({ thisTask, task, crmAppUrl, videoAppUrl }: Props)
 
   if (isVideoTask && videoAppUrl) {
     url = videoAppUrl;
-    const roomName = thisTask.attributes.conversationSid;
+    const roomName = thisTask.attributes.conversationSid || thisTask.attributes.videoTaskData?.callSid;
     const identity = getWorkerFriendlyName(Flex.Manager.getInstance().workerClient as unknown as Worker);
     // Take the room name from the chat conversation SID
     if (roomName) {
@@ -91,7 +91,7 @@ export const IFrameWrapper = ({ thisTask, task, crmAppUrl, videoAppUrl }: Props)
             const unreadMessageCount = context.conversation?.unreadMessages?.length as number;
             return (
               <Stack orientation="horizontal" spacing="space10" element="CUSTOM_STACK">
-                {document.fullscreenElement && unreadMessageCount > 0 && (
+                {TaskHelper.isChatBasedTask(thisTask) && document.fullscreenElement && unreadMessageCount > 0 && (
                   <Badge as="span" variant="neutral_counter">
                     {unreadMessageCount}
                   </Badge>
