@@ -3,7 +3,6 @@ const { prepareStudioFunction, extractStandardResponse } = require(Runtime.getFu
 ].path);
 const TaskOperations = require(Runtime.getFunctions()['common/twilio-wrappers/taskrouter'].path);
 
-
 const requiredParameters = [
   { key: 'caller', purpose: 'the caller ANI/CLI' },
   { key: 'name', purpose: 'name to be displayed for incoming task' },
