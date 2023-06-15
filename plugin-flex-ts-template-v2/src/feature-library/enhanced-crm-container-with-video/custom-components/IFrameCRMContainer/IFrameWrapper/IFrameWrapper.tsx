@@ -115,7 +115,7 @@ export const IFrameWrapper = ({ thisTask, task, crmAppUrl, videoAppUrl }: Props)
           style={frameStyle}
           src={url}
           ref={iFrameRef}
-          allow={isVideoTask ? 'camera; microphone; clipboard-write' : 'clipboard-write'}
+          allow={isVideoTask ? 'camera; microphone; clipboard-write; display-capture' : 'clipboard-write'}
           allowFullScreen={true}
         />
       </CustomizationProvider>
