@@ -4,12 +4,12 @@ import { useFlexSelector } from '@twilio/flex-ui';
 import IFrameWrapper from './IFrameWrapper';
 import AppState from '../../../../types/manager/AppState';
 
-type IFrameCRMComponentProps = {
+type IFrameVideoCRMComponentProps = {
   crmAppUrl: string;
   videoAppUrl: string;
 };
 
-export const IFrameCRMComponent = ({ crmAppUrl, videoAppUrl }: IFrameCRMComponentProps) => {
+export const IFrameVideoCRMComponent = ({ crmAppUrl, videoAppUrl }: IFrameVideoCRMComponentProps) => {
   const tasks = useFlexSelector((state: AppState) => state.flex.worker.tasks);
 
   // Only render iframes for tasks without a parent task
