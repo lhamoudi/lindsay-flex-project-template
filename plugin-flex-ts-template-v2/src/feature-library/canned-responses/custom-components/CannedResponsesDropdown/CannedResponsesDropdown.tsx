@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Actions, ITask, useFlexSelector, TaskHelper } from '@twilio/flex-ui';
+import { Actions, ITask, useFlexSelector, TaskHelper, templates } from '@twilio/flex-ui';
 import { Box } from '@twilio-paste/core/box';
 import { Tooltip } from '@twilio-paste/tooltip';
 import { Menu, MenuButton, MenuItem, MenuGroup, useMenuState } from '@twilio-paste/core/menu';
@@ -10,6 +10,8 @@ import { Button } from '@twilio-paste/button';
 
 import { CannedResponse, CannedResponseCategories, ResponseCategory } from '../../types/CannedResponses';
 import CannedResponsesService from '../../utils/CannedResponsesService';
+import { replaceStringAttributes } from '../../utils/helpers';
+import { StringTemplates } from '../../flex-hooks/strings';
 
 interface CannedResponsesDropdownProps {
   task: ITask;
@@ -33,7 +35,7 @@ const CannedResponsesDropdown: React.FunctionComponent<CannedResponsesDropdownPr
     if (currentInput.length > 0 && currentInput.charAt(currentInput.length - 1) !== ' ') {
       currentInput += ' ';
     }
-    currentInput += text;
+    currentInput += replaceStringAttributes(text, task);
     Actions.invokeAction('SetInputText', {
       body: currentInput,
       conversationSid,
@@ -68,7 +70,7 @@ const CannedResponsesDropdown: React.FunctionComponent<CannedResponsesDropdownPr
             disabled={TaskHelper.isInWrapupMode(task)}
             element="CANNED_RESPONSES_MENU_BUTTON"
           >
-            <ChatIcon decorative title="Canned responses" />
+            <ChatIcon decorative title={templates[StringTemplates.CannedResponses]()} />
           </MenuButton>
           <Menu {...menu} aria-label="canned-responses" element="CANNED_RESPONSES_MENU">
             {responseCategories?.categories.map((category: ResponseCategory) => (
@@ -83,7 +85,7 @@ const CannedResponsesDropdown: React.FunctionComponent<CannedResponsesDropdownPr
                         menu.hide();
                       }}
                     >
-                      {response.text}
+                      {replaceStringAttributes(response.text, task)}
                     </MenuItem>
                   ))}
                 </MenuGroup>
@@ -93,7 +95,7 @@ const CannedResponsesDropdown: React.FunctionComponent<CannedResponsesDropdownPr
         </>
       )}
       {error && (
-        <Tooltip text="There was an error fetching responses. Please reload the page.">
+        <Tooltip text={templates[StringTemplates.ErrorFetching]()}>
           <Button variant={'destructive_icon'}>
             <ErrorIcon decorative />
           </Button>
