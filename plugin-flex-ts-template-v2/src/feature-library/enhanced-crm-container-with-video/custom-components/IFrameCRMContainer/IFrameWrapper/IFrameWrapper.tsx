@@ -19,7 +19,7 @@ export const IFrameWrapper = ({ thisTask, task, crmAppUrl, videoAppUrl }: Props)
   const iFrameRef = useRef<HTMLIFrameElement>(null);
   const [iFrameKey, setIframeKey] = useState(0 as number);
   const wrapperDivRef = useRef<HTMLDivElement>(null);
-  const isVideoTask = thisTask?.attributes?.taskType === 'video';
+  const isVideoTask = thisTask?.taskChannelUniqueName === 'video';
 
   const getWorkerFriendlyName = (worker: Worker) => {
     return (
