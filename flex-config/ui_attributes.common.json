@@ -37,13 +37,6 @@
         "should_display_url_when_no_tasks": false,
         "display_url_when_no_tasks": "https://www.bing.com"
       },
-      "enhanced_crm_container_with_video": {
-        "enabled": false,
-        "pop_out_button": true,
-        "refresh_button": true,
-        "video_app_url": "<PLACEHOLDER_VIDEO_APP_URL>",
-        "crm_app_url": "http://www.bing.com"
-      },
       "internal_call": {
         "enabled": false
       },
@@ -208,10 +201,7 @@
         "per_queue": {
           "exampleQueueSid": {
             "require_disposition": true,
-            "dispositions": [
-              "Promotional Sale",
-              "Renewal"
-            ]
+            "dispositions": ["Promotional Sale", "Renewal"]
           }
         }
       },
@@ -233,7 +223,11 @@
         "enabled": false
       },
       "lindsay_video_tasks": {
-        "enabled": false
+        "enabled": false,
+        "pop_out_button": true,
+        "refresh_button": true,
+        "video_app_url": "<PLACEHOLDER_VIDEO_APP_URL>",
+        "crm_app_url": "http://www.bing.com"
       }
     }
   }

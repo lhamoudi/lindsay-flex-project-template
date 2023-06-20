@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import * as Flex from '@twilio/flex-ui';
-import { TaskHelper } from '@twilio/flex-ui';
 
 import { wrapperStyle, frameStyle, IFrameRefreshButtonStyledDiv } from './IFrameWrapperStyles';
 import { getUrl } from '../../../config';
