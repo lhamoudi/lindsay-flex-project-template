@@ -208,7 +208,10 @@
         "per_queue": {
           "exampleQueueSid": {
             "require_disposition": true,
-            "dispositions": ["Promotional Sale", "Renewal"]
+            "dispositions": [
+              "Promotional Sale",
+              "Renewal"
+            ]
           }
         }
       },
@@ -229,8 +232,8 @@
       "park_interaction": {
         "enabled": false
       },
-      "lindsay_set_insights_attributes": {
-        "enabled": true
+      "lindsay_video_tasks": {
+        "enabled": false
       }
     }
   }
