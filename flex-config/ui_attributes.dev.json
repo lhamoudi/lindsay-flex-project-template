@@ -2,22 +2,69 @@
   "custom_data": {
     "serverless_functions_domain": "<PLACEHOLDER_SERVERLESS_DOMAIN>",
     "features": {
-      "activity_skill_filter": {
-        "rules": {}
-      },
-      "conference": {
+      "lindsay_video_tasks": {
         "enabled": true,
-        "hold_workaround": false
+        "pop_out_button": true,
+        "refresh_button": true,
+        "video_app_url": "http://localhost:3000",
+        "crm_app_url": "http://www.bing.com"
       },
-      "schedule_manager": {
+      "lindsay_set_insights_attributes": {
+        "enabled": true
+      },
+      "callbacks": {
         "enabled": true,
-        "serverless_domain": "<PLACEHOLDER_SCHEDULE_MANAGER_DOMAIN>"
+        "allow_requeue": true,
+        "max_attempts": 3,
+        "auto_select_task": true
       },
-      "enhanced_crm_container": {
-        "enabled": false
+      "caller_id": {
+        "enabled": true
+      },
+      "conversation_transfer": {
+        "enabled": false,
+        "cold_transfer": true,
+        "multi_participant": true
       },
       "chat_to_video_escalation": {
         "enabled": false
+      },
+      "conference": {
+        "enabled": false,
+        "hold_workaround": false
+      },
+      "enhanced_crm_container": {
+        "enabled": false,
+        "should_display_url_when_no_tasks": false,
+        "display_url_when_no_tasks": "https://www.bing.com"
+      },
+      "scrollable_activities": {
+        "enabled": true
+      },
+      "supervisor_barge_coach": {
+        "enabled": true,
+        "agent_coaching_panel": true,
+        "supervisor_monitor_panel": true,
+        "agent_assistance": true,
+        "supervisor_alert_toggle": true
+      },
+      "omni_channel_capacity_management": {
+        "enabled": false,
+        "channel": "chat",
+        "default_max_capacity": 2
+      },
+      "device_manager": {
+        "enabled": true
+      },
+      "dual_channel_recording": {
+        "enabled": false,
+        "channel": "worker"
+      },
+      "pause_recording": {
+        "enabled": true,
+        "include_silence": false,
+        "indicator_banner": false,
+        "indicator_permanent": true
       },
       "activity_reservation_handler": {
         "enabled": true,
@@ -28,19 +75,6 @@
           "wrapup": "Wrap Up",
           "wrapupNoAcd": "Wrap Up, No ACD"
         }
-      },
-      "agent_automation": {
-        "enabled": true,
-        "configuration": [
-          {
-            "channel": "voice",
-            "auto_accept": false,
-            "auto_select": false,
-            "auto_wrapup": true,
-            "required_attributes": [],
-            "wrapup_time": 8000
-          }
-        ]
       },
       "teams_view_filters": {
         "enabled": true,
@@ -63,15 +97,112 @@
           "Other"
         ]
       },
-      "lindsay_set_insights_attributes": {
+      "supervisor_capacity": {
         "enabled": true
       },
-      "lindsay_video_tasks": {
+      "schedule_manager": {
+        "enabled": true
+      },
+      "multi_call": {
+        "enabled": false
+      },
+      "hang_up_by": {
+        "enabled": false
+      },
+      "chat_transfer": {
+        "enabled": false
+      },
+      "agent_automation": {
         "enabled": true,
-        "pop_out_button": true,
-        "refresh_button": true,
-        "video_app_url": "<PLACEHOLDER_VIDEO_APP_URL>",
-        "crm_app_url": "http://www.bing.com"
+        "configuration": [
+          {
+            "channel": "voice",
+            "auto_accept": false,
+            "auto_select": false,
+            "auto_wrapup": false,
+            "required_attributes": [],
+            "wrapup_time": 30000
+          },
+          {
+            "channel": "chat",
+            "auto_accept": false,
+            "auto_select": false,
+            "auto_wrapup": false,
+            "required_attributes": [],
+            "wrapup_time": 30000
+          }
+        ]
+      },
+      "supervisor_complete_reservation": {
+        "enabled": true,
+        "outcome": "Completed by supervisor"
+      },
+      "canned_responses": {
+        "enabled": false,
+        "location": "CRM"
+      },
+      "custom_hold_music": {
+        "enabled": false,
+        "url": ""
+      },
+      "custom_transfer_directory": {
+        "enabled": true,
+        "use_paste_search_icon": false,
+        "queue": {
+          "enabled": true,
+          "show_only_queues_with_available_workers": true,
+          "show_real_time_data": true,
+          "enforce_queue_filter_from_worker_object": true,
+          "enforce_global_exclude_filter": false,
+          "global_exclude_filter": ""
+        },
+        "external_directory": {
+          "enabled": false,
+          "skipPhoneNumberValidation": false,
+          "directory": [
+            {
+              "cold_transfer_enabled": true,
+              "warm_transfer_enabled": true,
+              "label": "Sample Entry",
+              "number": "+10000000000"
+            }
+          ]
+        }
+      },
+      "dispositions": {
+        "enabled": false,
+        "enable_notes": true,
+        "require_disposition": true,
+        "global_dispositions": [
+          "Resolved",
+          "Not Resolved",
+          "Follow-up Required",
+          "Escalation",
+          "Wrong Department"
+        ],
+        "per_queue": {
+          "exampleQueueSid": {
+            "require_disposition": true,
+            "dispositions": ["Promotional Sale", "Renewal"]
+          }
+        }
+      },
+      "emoji_picker": {
+        "enabled": true
+      },
+      "attribute_viewer": {
+        "enabled": true,
+        "enabled_for_agents": false
+      },
+      "admin_ui": {
+        "enabled": true
+      },
+      "localization": {
+        "enabled": false,
+        "show_menu": true
+      },
+      "park_interaction": {
+        "enabled": false
       }
     }
   }
