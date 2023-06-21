@@ -8,6 +8,6 @@ export const stringHook = () => ({
 export const systemStringHook = () => ({
   'en-US': {
     TaskLineChatReserved: 'Incoming {{task.taskChannelUniqueName}} request',
-    TaskHeaderEndChat: 'END SESSION',
+    TaskHeaderEndChat: 'End Video Chat',
   },
 });
