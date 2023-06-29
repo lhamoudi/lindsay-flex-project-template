@@ -41,6 +41,7 @@ export interface TaskAttributes {
   autoClose?: boolean;
   parentTask?: string;
   taskType?: string;
+  customer?: string;
 
   // feature-library/callback
   callBackData: {
