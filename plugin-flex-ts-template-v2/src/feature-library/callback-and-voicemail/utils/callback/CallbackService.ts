@@ -29,6 +29,7 @@ export interface CreateCallbackRequest {
   transcriptSid?: string;
   transcriptText?: string;
   isDeleted?: boolean;
+  customer: string;
 }
 
 export interface FetchVoicemailResponse {
@@ -118,6 +119,7 @@ class CallbackService extends ApiService {
         transcriptSid: task.attributes.callBackData.transcriptSid,
         transcriptText: task.attributes.callBackData.transcriptText,
         isDeleted: task.attributes.callBackData.isDeleted,
+        customer: task.attributes.customer,
       };
 
       const response = await this.#createCallback(request);
@@ -150,6 +152,7 @@ class CallbackService extends ApiService {
       transcriptSid: request.transcriptSid ? encodeURIComponent(request.transcriptSid) : undefined,
       transcriptText: request.transcriptText ? encodeURIComponent(request.transcriptText) : undefined,
       isDeleted: request.isDeleted ? encodeURIComponent(request.isDeleted) : undefined,
+      customer: request.customer ? encodeURIComponent(request.customer) : undefined,
     };
 
     return this.fetchJsonWithReject<CreateCallbackResponse>(

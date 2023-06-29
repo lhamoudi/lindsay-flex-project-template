@@ -23,6 +23,7 @@ export enum StringTemplates {
   VoicemailLoading = 'PSCallbackVoicemailLoading',
   VoicemailError = 'PSCallbackVoicemailError',
   VoicemailTryAgain = 'PSCallbackVoicemailTryAgain',
+  Customer = 'PSCallbackVoicemailCustomer',
 }
 
 export const stringHook = () => ({
@@ -46,6 +47,7 @@ export const stringHook = () => ({
     [StringTemplates.VoicemailLoading]: 'Loading voicemail...',
     [StringTemplates.VoicemailError]: 'Error loading voicemail.',
     [StringTemplates.VoicemailTryAgain]: 'Try again',
+    [StringTemplates.Customer]: 'Customer',
   },
   'es-MX': esMX,
   'pt-BR': ptBR,

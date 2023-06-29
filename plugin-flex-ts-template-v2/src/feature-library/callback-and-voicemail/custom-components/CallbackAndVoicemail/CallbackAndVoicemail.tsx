@@ -31,7 +31,7 @@ export const CallbackAndVoicemail = ({ task, allowRequeue, maxAttempts }: Callba
   };
 
   const taskStatus = task?.taskStatus;
-  const { taskType, callBackData } = task?.attributes as TaskAttributes;
+  const { taskType, callBackData, customer } = task?.attributes as TaskAttributes;
   const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
   let timeReceived;
 
@@ -109,6 +109,13 @@ export const CallbackAndVoicemail = ({ task, allowRequeue, maxAttempts }: Callba
             </Text>
           </Box>
         )}
+
+        <Box element="C_AND_V_CONTENT_BOX">
+          <Heading element="C_AND_V_CONTENT_HEADING" as="h4" variant="heading40">
+            <Template source={templates[StringTemplates.Customer]} />
+          </Heading>
+          <Text as="span">{customer}</Text>
+        </Box>
 
         {callBackData?.recordingSid && !callBackData.isDeleted && (
           <Box element="C_AND_V_CONTENT_BOX">

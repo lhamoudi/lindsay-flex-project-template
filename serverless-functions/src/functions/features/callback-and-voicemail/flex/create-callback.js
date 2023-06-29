@@ -31,6 +31,7 @@ exports.handler = prepareFlexFunction(requiredParameters, async (context, event,
       transcriptText,
       isDeleted,
       taskChannel: overriddenTaskChannel,
+      customer,
     } = event;
 
     const result = await CallbackOperations.createCallbackTask({
@@ -51,6 +52,7 @@ exports.handler = prepareFlexFunction(requiredParameters, async (context, event,
       transcriptText,
       isDeleted,
       overriddenTaskChannel,
+      customer,
     });
 
     const { status, taskSid } = result;

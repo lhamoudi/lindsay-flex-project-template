@@ -35,6 +35,7 @@ exports.handler = prepareStudioFunction(requiredParameters, async (context, even
       TranscriptionText,
       isDeleted,
       taskChannel: overriddenTaskChannel,
+      customer,
     } = event;
 
     const result = await CallbackOperations.createCallbackTask({
@@ -55,6 +56,7 @@ exports.handler = prepareStudioFunction(requiredParameters, async (context, even
       transcriptText: transcriptText || TranscriptionText,
       isDeleted,
       overriddenTaskChannel,
+      customer,
     });
 
     const { status, taskSid } = result;

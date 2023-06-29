@@ -19,6 +19,7 @@ exports.createCallbackTask = async (parameters) => {
     transcriptText,
     isDeleted,
     overriddenTaskChannel,
+    customer,
   } = parameters;
 
   // use assigned values or use defaults
@@ -50,6 +51,7 @@ exports.createCallbackTask = async (parameters) => {
     conversations: {
       conversation_id,
     },
+    customer,
   };
 
   return TaskOperations.createTask({
