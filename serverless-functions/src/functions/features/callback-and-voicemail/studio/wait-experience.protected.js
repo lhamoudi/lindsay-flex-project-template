@@ -104,7 +104,7 @@ async function cancelTask(context, task, cancelReason) {
  * @param {*} taskSid
  * @returns
  */
-async function handleCallbackOrVoicemailSelected(context, isVoicemail, callSid, taskSid) {
+async function handleCallbackOrVoicemailSelected(context, isVoicemail, callSid, taskSid, customer) {
   const twiml = new Twilio.twiml.VoiceResponse();
   const domain = `https://${context.DOMAIN_NAME}`;
 
@@ -121,7 +121,9 @@ async function handleCallbackOrVoicemailSelected(context, isVoicemail, callSid, 
     callSid,
     params: {
       method: 'POST',
-      url: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=${mode}&CallSid=${callSid}&enqueuedTaskSid=${taskSid}`,
+      url: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=${mode}&CallSid=${callSid}&enqueuedTaskSid=${taskSid}&customer=${encodeURIComponent(
+        customer,
+      )}`,
     },
   });
   const { success, status } = result;
@@ -133,7 +135,9 @@ async function handleCallbackOrVoicemailSelected(context, isVoicemail, callSid, 
     console.error(`Failed to update call ${callSid} with new TwiML. Status: ${status}`);
     twiml.say(options.sayOptions, options.messages.processingError);
     twiml.redirect(
-      `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${callSid}&enqueuedTaskSid=${taskSid}&skipGreeting=true`,
+      `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${callSid}&enqueuedTaskSid=${taskSid}&customer=${encodeURIComponent(
+        customer,
+      )}&skipGreeting=true`,
     );
     return twiml;
   }
@@ -167,7 +171,9 @@ exports.handler = async (context, event, callback) => {
       if (enqueuedTask) {
         twiml.redirect(
           redirectBaseUrl +
-            (enqueuedTask ? `&enqueuedTaskSid=${enqueuedTask.sid}&customer=${enqueuedTask.attributes.customer}` : ''),
+            (enqueuedTask
+              ? `&enqueuedTaskSid=${enqueuedTask.sid}&customer=${encodeURIComponent(enqueuedTask.attributes.customer)}`
+              : ''),
         );
       } else {
         // Log an error for our own debugging purposes, but don't fail the call
@@ -187,7 +193,9 @@ exports.handler = async (context, event, callback) => {
         const initialGather = twiml.gather({
           input: 'dtmf',
           timeout: '2',
-          action: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=handle-initial-choice&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}`,
+          action: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=handle-initial-choice&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+            customer,
+          )}`,
         });
         initialGather.say(options.sayOptions, options.messages.repeatingPrompt);
         initialGather.play(holdMusicUrl);
@@ -199,7 +207,9 @@ exports.handler = async (context, event, callback) => {
       }
       // Loop back to the start if we reach this point
       twiml.redirect(
-        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}&skipGreeting=true`,
+        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+          customer,
+        )}&skipGreeting=true`,
       );
       return callback(null, twiml);
 
@@ -210,14 +220,18 @@ exports.handler = async (context, event, callback) => {
         const callbackOrVoicemailGather = twiml.gather({
           input: 'dtmf',
           timeout: '2',
-          action: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=handle-callback-or-voicemail-choice&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}`,
+          action: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=handle-callback-or-voicemail-choice&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+            customer,
+          )}`,
         });
         callbackOrVoicemailGather.say(options.sayOptions, options.messages.callbackOrVoicemailChoice);
       }
 
       // Loop back to the start of the wait loop
       twiml.redirect(
-        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}&skipGreeting=true`,
+        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+          customer,
+        )}&skipGreeting=true`,
       );
       return callback(null, twiml);
 
@@ -225,12 +239,17 @@ exports.handler = async (context, event, callback) => {
       if (Digits === '1' || Digits === '2') {
         // 1 = callback, 2 = voicemail
         const isVoicemail = Digits === '2';
-        return callback(null, await handleCallbackOrVoicemailSelected(context, isVoicemail, CallSid, enqueuedTaskSid));
+        return callback(
+          null,
+          await handleCallbackOrVoicemailSelected(context, isVoicemail, CallSid, enqueuedTaskSid, customer),
+        );
       }
 
       // Loop back to the start of the wait loop if the caller pressed any other key
       twiml.redirect(
-        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}&skipGreeting=true`,
+        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+          customer,
+        )}&skipGreeting=true`,
       );
       return callback(null, twiml);
 
@@ -253,8 +272,12 @@ exports.handler = async (context, event, callback) => {
       //  Main logic for Recording the voicemail
       twiml.say(options.sayOptions, options.messages.recordVoicemailPrompt);
       twiml.record({
-        action: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=voicemail-recorded&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}`,
-        transcribeCallback: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=submit-voicemail&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}`,
+        action: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=voicemail-recorded&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+          customer,
+        )}`,
+        transcribeCallback: `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=submit-voicemail&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+          customer,
+        )}`,
         method: 'GET',
         playBeep: 'true',
         transcribe: true,
@@ -263,7 +286,9 @@ exports.handler = async (context, event, callback) => {
       });
       twiml.say(options.sayOptions, options.messages.voicemailNotCaptured);
       twiml.redirect(
-        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=record-voicemail&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}`,
+        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=record-voicemail&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+          customer,
+        )}`,
       );
       return callback(null, twiml);
 
@@ -295,7 +320,9 @@ exports.handler = async (context, event, callback) => {
       //  Default case - if we don't recognize the mode, redirect to the main wait loop
       twiml.say(options.sayOptions, options.messages.processingError);
       twiml.redirect(
-        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${customer}&skipGreeting=true`,
+        `${domain}/features/callback-and-voicemail/studio/wait-experience?mode=main-wait-loop&CallSid=${CallSid}&enqueuedTaskSid=${enqueuedTaskSid}&customer=${encodeURIComponent(
+          customer,
+        )}&skipGreeting=true`,
       );
       return callback(null, twiml);
   }
