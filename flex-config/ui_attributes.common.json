@@ -230,6 +230,9 @@
         "refresh_button": true,
         "video_app_url": "<PLACEHOLDER_VIDEO_APP_URL>",
         "crm_app_url": "http://www.bing.com"
+      },
+      "custom_task_view": {
+        "enabled": true
       }
     }
   }
