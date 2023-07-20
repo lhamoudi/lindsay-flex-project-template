@@ -234,6 +234,9 @@
         "refresh_button": true,
         "video_app_url": "<PLACEHOLDER_VIDEO_APP_URL>",
         "crm_app_url": "http://www.bing.com"
+      },
+      "lindsay_branding": {
+        "enabled": false
       }
     }
   }
