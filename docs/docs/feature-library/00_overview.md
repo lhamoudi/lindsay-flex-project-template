@@ -31,13 +31,14 @@ The **Flex Project Template** comes with a set of features enabled by default wi
 | Internal Call (Agent to Agent) | _provide agents the ability to dial each other_                                                     | [internal-call](/feature-library/internal-call)                                       |
 | Park interaction               | _provide agents the ability to park interactions, preserving conversation history_                  | [park-interaction](/feature-library/park-interaction)                                 |
 | Pause Recording                 | _provide agents the ability to temporarily pause and resume call recording_ | [pause-recording](/feature-library/pause-recording)                                 |
+| Queues View Data Tiles          | _add Custom Data Tiles with real-time channel metrics (Task Counts, SLA%)_ | [queues-view-data-tiles](/feature-library/queues-view-data-tiles)           |
 | Schedule Manager               | _a flexible, robust, and scalable way to manage open and closed hours for Twilio Flex applications_ | [schedule-manager](/feature-library/schedule-manager)                                 |✅                    |
 | Scrollable Activities           | _allow the scrolling of the activities list_                                | [scrollable-activities](/feature-library/scrollable-activities)                     |
 | Supervisor Barge Coach          | _introduce advanced supervisor barge and coach features_                    | [supervisor-barge-coach](/feature-library/supervisor-barge-coach)                   |
 | Supervisor Capacity             | _allow supervisors to update worker capacity configuration within Flex_     | [supervisor-capacity](/feature-library/supervisor-capacity)                         |
 | Supervisor Complete Reservation | _allows supervisor to remotely complete agent tasks_                        | [supervisor-complete-reservation](/feature-library/supervisor-complete-reservation) |
 | Teams View Filters              | _adds additional filtering options to the supervisor teams view_            | [teams-view-filters](/feature-library/teams-view-filters)                           |
-| Teams View Enhancements         | _adds optional columns (Team, Dept, Location, Skills) to the Workers Table_            | [teams-view-enhancements](/feature-library/teams-view-enhancements)                           |
+| Teams View Enhancements         | _adds optional columns (Team, Dept, Location, Skills) to the Workers Table. <br/> enable task highlighting based on task age_             | [teams-view-enhancements](/feature-library/teams-view-enhancements)                           |
 
 ---
 
